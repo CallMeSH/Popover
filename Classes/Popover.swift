@@ -426,14 +426,15 @@ private extension Popover {
     fillLayer.fillColor = self.blackOverlayColor.cgColor
     self.blackOverlay.layer.addSublayer(fillLayer)
   }
-
+    
   func show() {
     self.setNeedsDisplay()
     switch self.popoverType {
     case .up:
-      self.contentView.frame.origin.y = 0.0
+        NSLayoutConstraint(item: self.contentView, attribute: .leading, relatedBy: .equal, toItem: self, attribute: .leading, multiplier: 1.0, constant: 0.0).isActive = true
+        NSLayoutConstraint(item: self.contentView, attribute: .top, relatedBy: .equal, toItem: self, attribute: .top, multiplier: 1.0, constant: 0.0).isActive = true
     case .down:
-      self.contentView.frame.origin.y = self.arrowSize.height
+        NSLayoutConstraint(item: self.contentView, attribute: .top, relatedBy: .equal, toItem: self, attribute: .top, multiplier: 1.0, constant: self.arrowSize.height).isActive = true
     }
     self.addSubview(self.contentView)
     self.containerView.addSubview(self)
